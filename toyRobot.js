@@ -16,14 +16,18 @@ const place = (x, y, dir) => {
 
 // 2.Move forward func
 const move = (oldX, oldY, oldDir) => {
+  if ((oldX === 5 && oldDir === "EAST") ||
+      (oldX === 0 && oldDir === "WEST") ||
+      (oldY === 5 && oldDir === "NORTH") ||
+      (oldY === 0 && oldDir === "SOUTH")) {
+    throw new Error("Move out of bounds!");
+  }
   let newX = oldX;
   let newY = oldY;
-
-  if (oldDir === "EAST" && oldX < 5) newX++;
-  else if (oldDir === "WEST" && oldX > 0) newX--;
-  else if (oldDir === "NORTH" && oldY < 5) newY++;
-  else if (oldDir === "SOUTH" && oldY > 0) newY--;
-  else return "You can't move forward in this direction";
+  if (oldDir === "EAST") newX++;
+  else if (oldDir === "WEST") newX--;
+  else if (oldDir === "NORTH") newY++;
+  else if (oldDir === "SOUTH") newY--;
 
   return [newX, newY, oldDir];
 };
